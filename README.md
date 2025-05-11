@@ -1,6 +1,6 @@
 # 🔐 ZKChat: Zero-Knowledge Secure Web3 Messaging Platform
 
-![ZKChat Banner](https://via.placeholder.com/1200x300.png?text=ZKChat:+Secure+Web3+Messaging)
+
 
 > **Hackathon Submission: ZKChat - Where Privacy Meets Blockchain**  
 > A next-generation secure messaging platform powered by zero-knowledge proofs and Solana blockchain.
@@ -56,10 +56,7 @@ ZKChat is a cutting-edge Web3 messaging platform that leverages zero-knowledge p
 - **Backend Proxy & Caching**: Smart API proxy with caching to prevent rate limits and CORS issues
 - **Adaptive Rate Limiting**: Intelligent request throttling with random jitter to avoid API limits
 
-### 🚀 Live Demo
 
-- [ZKChat Live Demo](https://zkchat.vercel.app)
-- [Demo Video](https://youtu.be/yourdemovideo)
 
 ## ✨ Features
 
@@ -252,7 +249,7 @@ ZKChat implements intelligent caching and rate limiting to ensure optimal API us
    NEXT_PUBLIC_HELIUS_API_KEY=3d125df1-b66e-40f5-a45a-c1e2f73d3818
    
    # Gemini API (for AI assistant)
-   NEXT_PUBLIC_GEMINI_API_KEY=AIzaSyC9YKF89cnfSAAzM6TilPY29Ea9LeiIf8s
+   NEXT_PUBLIC_GEMINI_API_KEY=Your_GEMINI_API_KEY
    ```
 
 4. Run the development server
@@ -370,10 +367,7 @@ These improvements have resolved the 401 and 429 errors previously encountered w
 
 ## 👥 Team
 
-- **[Team Member 1]** - Blockchain Developer & Project Lead
-- **[Team Member 2]** - Frontend Engineer & UI/UX Designer
-- **[Team Member 3]** - Smart Contract Developer
-- **[Team Member 4]** - Full-Stack Engineer
+- **[Divyansh Sharma]** - Jack of all trades
 
 ## 🙏 Acknowledgements
 
@@ -388,5 +382,3 @@ These improvements have resolved the 401 and 429 errors previously encountered w
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
-
-Built with ❤️ for [Hackathon Name] 2023 
