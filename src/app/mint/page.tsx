@@ -8,6 +8,9 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { mintCompressedNFT, hasVipAccessPass, getCompressedNFTsByOwner } from '../../services/nftService';
 
+// Tell Next.js this is not a static page
+export const dynamic = 'force-dynamic';
+
 export default function MintPage() {
   const { connected, publicKey } = useWallet();
   const router = useRouter();

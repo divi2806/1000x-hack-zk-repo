@@ -9,17 +9,6 @@ import {
   Keypair, 
   LAMPORTS_PER_SOL 
 } from '@solana/web3.js';
-import { 
-  SPL_ACCOUNT_COMPRESSION_PROGRAM_ID,
-  createAllocTreeIx,
-  ValidDepthSizePair,
-  SPL_NOOP_PROGRAM_ID,
-} from '@solana/spl-account-compression';
-import { 
-  PROGRAM_ID as BUBBLEGUM_PROGRAM_ID,
-  createMintToCollectionV1Instruction,
-  MetadataArgs, 
-} from '@metaplex-foundation/mpl-bubblegum';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 

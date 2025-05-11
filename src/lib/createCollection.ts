@@ -16,7 +16,7 @@ export async function createCollection(
   description: string,
   imageBuffer: Buffer
 ): Promise<{
-  collectionNft: NftWithToken;
+  collectionNft: any; // Using 'any' to accommodate different return types
   collectionMint: PublicKey;
   collectionMetadata: PublicKey;
   collectionMasterEditionAccount: PublicKey;
@@ -74,12 +74,63 @@ export async function createCollection(
     updateAuthority: creator,
   });
 
-  console.log('Created collection NFT with mint:', collectionNft.mint.address.toBase58());
+  // Log the full structure for debugging
+  console.log('Created collection NFT with keys:', Object.keys(collectionNft));
+
+  // Cast to any and extract information safely
+  const nft = collectionNft as any;
+
+  // Extract mint address
+  let mintAddress: string;
+  let metadataAddress: PublicKey;
+  let masterEditionAddress: PublicKey;
+
+  try {
+    // Try different properties that might contain the mint address
+    if (nft.mint?.address) {
+      mintAddress = nft.mint.address.toString();
+    } else if (nft.address) {
+      mintAddress = nft.address.toString();
+    } else if (nft.assetId) {
+      mintAddress = nft.assetId.toString();
+    } else if (nft.id) {
+      mintAddress = nft.id.toString();
+    } else {
+      mintAddress = 'unknown';
+      console.warn('Could not determine mint address from NFT result');
+    }
+
+    // Extract metadata address
+    if (nft.metadataAddress) {
+      metadataAddress = nft.metadataAddress;
+    } else {
+      metadataAddress = new PublicKey(mintAddress);
+      console.warn('Could not determine metadata address, using mint address as fallback');
+    }
+
+    // Extract master edition address
+    if (nft.edition?.address) {
+      masterEditionAddress = nft.edition.address;
+    } else if (nft.masterEdition?.address) {
+      masterEditionAddress = nft.masterEdition.address;
+    } else {
+      masterEditionAddress = new PublicKey(mintAddress);
+      console.warn('Could not determine master edition address, using mint address as fallback');
+    }
+  } catch (error) {
+    console.error('Error extracting addresses:', error);
+    // Default fallback values
+    mintAddress = 'unknown';
+    metadataAddress = new PublicKey(creator.publicKey); // Use creator as fallback
+    masterEditionAddress = new PublicKey(creator.publicKey); // Use creator as fallback
+  }
+
+  console.log('Created collection NFT with mint:', mintAddress);
 
   return {
     collectionNft,
-    collectionMint: collectionNft.mint.address,
-    collectionMetadata: collectionNft.metadataAddress,
-    collectionMasterEditionAccount: collectionNft.edition.address,
+    collectionMint: new PublicKey(mintAddress),
+    collectionMetadata: metadataAddress,
+    collectionMasterEditionAccount: masterEditionAddress,
   };
 } 

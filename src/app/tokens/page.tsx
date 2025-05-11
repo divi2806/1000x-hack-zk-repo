@@ -7,6 +7,9 @@ import { createExperienceToken, getCreatorTokens, generateTokenClaimUrl, TokenDa
 import { QRCodeSVG } from 'qrcode.react';
 import toast from 'react-hot-toast';
 
+// Tell Next.js this is not a static page
+export const dynamic = 'force-dynamic';
+
 export default function TokensPage() {
   const { publicKey, connected } = useWallet();
   const [tokens, setTokens] = useState<TokenData[]>([]);

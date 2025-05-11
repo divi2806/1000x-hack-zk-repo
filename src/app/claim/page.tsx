@@ -1,13 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { claimExperienceToken } from '@/services/tokenService';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import toast from 'react-hot-toast';
 
-export default function ClaimPage() {
+// Tell Next.js this is not a static page
+export const dynamic = 'force-dynamic';
+
+function ClaimPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { publicKey, connected } = useWallet();
@@ -19,7 +22,7 @@ export default function ClaimPage() {
   
   useEffect(() => {
     // Get claim code from URL
-    const code = searchParams.get('code');
+    const code = searchParams?.get('code');
     if (code) {
       setClaimCode(code);
     }
@@ -135,5 +138,14 @@ export default function ClaimPage() {
         )}
       </div>
     </div>
+  );
+}
+
+// Wrap with suspense boundary for useSearchParams
+export default function ClaimPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+      <ClaimPageContent />
+    </Suspense>
   );
 } 
