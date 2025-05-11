@@ -71,4 +71,4 @@ node_modules/
 # Next.js build artifacts
 .next/
 out/
-dist/
+dist/.next/
